@@ -1,4 +1,4 @@
-import {Events, Interaction} from "discord.js";
+import {CommandInteraction, Events, Interaction} from "discord.js";
 import {ChatMode, IBotEvent} from "../types/types";
 import dayjs from "dayjs";
 import UserController from "../controllers/UserController";
@@ -73,7 +73,7 @@ const event: IBotEvent = {
                 await interaction.update({
                     content: `Successfully change ChatMode to ${chatModeKey}`,
                     components: [selectChatMode(selectedMode)],
-                    embeds: [selectChatModeEmbed(chatModeKey)],
+                    embeds: [selectChatModeEmbed((interaction as unknown as CommandInteraction), chatModeKey)],
                 });
             }
         }
