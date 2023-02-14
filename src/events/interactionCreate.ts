@@ -20,7 +20,10 @@ const event: IBotEvent = {
             if (!command) return;
             if (command.cooldown && cooldown) {
                 if (CURRENT_TIMESTAMP < cooldown) {
-                    interaction.reply(`You have to wait ${CDDuration} second(s) to use this command again!`);
+                    interaction.reply({
+                        ephemeral: true,
+                        content: `You have to wait ${CDDuration} second(s) to use this command again!`,
+                    });
                     setTimeout(() => interaction.deleteReply(), 5000);
                     return;
                 }
@@ -56,11 +59,11 @@ const event: IBotEvent = {
                 const inConversation = await ConversationController.inConversation(user);
 
                 if (!inConversation) {
-                    await interaction.deferUpdate();
-                    await interaction.followUp({
-                        ephemeral: true,
+                    await interaction.deferReply({ ephemeral: true });
+                    await interaction.editReply({
                         content: `You are not in conversation or the conversation session is expired.\nPlease, start a new conversation to use this command.`,
                     });
+                    setTimeout(() => interaction.deleteReply(), 5000);
                     return;
                 }
 
