@@ -4,6 +4,7 @@ import ConversationController from "../controllers/ConversationController";
 import UserController from "../controllers/UserController";
 import GuildController from "../controllers/GuildController";
 import dayjs from "dayjs";
+import {startConversationEmbed} from "../embed/StartConversationEmbed";
 
 const command: ISlashCommand = {
     command: new SlashCommandBuilder()
@@ -29,19 +30,7 @@ const command: ISlashCommand = {
         const conversationExpires = dayjs().add(conversationTime, 'm').valueOf();
         const conversation = await ConversationController.startNewConversation(user, conversationExpires);
         const { currentChatMode } = conversation;
-
-        const embed = new EmbedBuilder()
-            .setColor(ColorTable.variant)
-            .setTitle("Conversation has started. Now you can start chatting with ChatGPT Bot.")
-            .setAuthor({ name:  interaction.user.tag, iconURL: interaction.user.avatarURL()!})
-            .addFields(
-                { name: "Current Mode", value: currentChatMode },
-                { name: "Conversation Time", value: `${conversationTime} minutes` }
-            )
-            .setTimestamp()
-            .setFooter({ text: "Chat enabled", iconURL: interaction.user.avatarURL()! });
-
-        await interaction.reply({ ephemeral: true, embeds: [embed] });
+        await interaction.reply({ ephemeral: true, embeds: [startConversationEmbed(interaction, currentChatMode, conversationTime)] });
     }
 }
 
