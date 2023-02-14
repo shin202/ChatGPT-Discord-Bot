@@ -24,7 +24,7 @@ const event: IBotEvent = {
         const requiredPermissions = checkPermissions(message.member!, command.permissions);
         if (requiredPermissions) {
             const msg = `You don't have enough permissions to use this command.\n Required permissions: ${requiredPermissions.join(", ")}`
-            return sendTimedMessage(msg, message.channel, 5000);
+            return sendTimedMessage(message, msg, 5000);
         }
 
         const cooldown = message.client.cooldowns.get(`${command.name}-${message.member?.user.id}`);
@@ -34,7 +34,7 @@ const event: IBotEvent = {
 
         if (command.cooldown && cooldown) {
             if (CURRENT_TIMESTAMP < cooldown) {
-                sendTimedMessage(`You have to wait ${CDDuration} second(s) to use this command again!`, message.channel, 5000);
+                sendTimedMessage(message, `You have to wait ${CDDuration} second(s) to use this command again!`, 5000);
                 return;
             }
 

@@ -1,10 +1,10 @@
-import {GuildMember, PermissionFlagsBits, PermissionResolvable, TextChannel} from "discord.js";
+import {GuildMember, Message, PermissionFlagsBits, PermissionResolvable} from "discord.js";
 import {ColorTable, ColorType} from "../types/types";
 import chalk from "chalk";
 
-export const sendTimedMessage = (message: string, channel: TextChannel, duration: number) => {
-    channel.send(message).then((msg) => {
-        setTimeout(async () => (await channel.messages.fetch(msg)).delete(), duration);
+export const sendTimedMessage = (message: Message, replyMessage: string, duration: number) => {
+    message.reply(replyMessage).then((msg) => {
+        setTimeout(() => msg.delete(), duration)
     });
 }
 
