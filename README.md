@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/shin202/ChatGPT-Discord-Bot">
-    <img src="assets/images/logo.png" alt="Logo" width="200" height="200">
+    <img src="src/assets/images/logo.png" alt="Logo" width="200" height="200">
   </a>
 
 <h3 align="center">ChatGPT Discord Bot</h3>
@@ -139,9 +139,9 @@ I can't afford to deploy its, so you can deploy your own.
 
 ## Some Screenshots
 
-<img src="assets/images/screenshots/1.png">
-<img src="assets/images/screenshots/2.png">
-<img src="assets/images/screenshots/3.png">
+<img src="src/assets/images/screenshots/1.png">
+<img src="src/assets/images/screenshots/2.png">
+<img src="src/assets/images/screenshots/3.png">
 
 <!-- CONTRIBUTING -->
 ## Contributing
