@@ -46,7 +46,7 @@ export enum ColorTable {
     variant = "#00FFC6",
 }
 
-export type ColorType = "mongodb" | "event" | "commands" | "slashCommands";
+export type ColorType = "mongodb" | "event" | "commands" | "slashCommands" | "error" | "variant";
 
 export interface IChatModeInfo {
     name: string,
@@ -118,3 +118,9 @@ export interface IConversation {
 }
 
 export interface IConversationModel extends IConversation, Document{};
+
+export enum ComponentsCustomId {
+    SelectChatMode = "selectChatMode",
+    CancelEndConversation = "cancelEndConversationBtn",
+    EndConversation = "endConversationBtn",
+}
