@@ -13,7 +13,7 @@ class DBService {
             this.connection = await mongoose.connect(MONGODB_URI!);
             console.log(color("mongodb", '🍃 MongoDB connected!'));
         } catch (err) {
-            console.error(err);
+            throw new Error((err as Error).message);
         }
     }
 }
