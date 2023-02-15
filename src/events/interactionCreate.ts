@@ -1,6 +1,12 @@
 import {Events, Interaction} from "discord.js";
 import {IBotEvent} from "../types/types";
-import {handleChatInputCommand, handleChatModeChange, handleCommandAutoComplete, handleEndConversation} from "../utils";
+import {
+    handleChatInputCommand,
+    handleChatModeChange,
+    handleClearUserMessage,
+    handleCommandAutoComplete,
+    handleEndConversation
+} from "../utils";
 
 const event: IBotEvent = {
     name: Events.InteractionCreate,
@@ -13,6 +19,7 @@ const event: IBotEvent = {
             await handleChatModeChange(interaction);
         } else if (interaction.isButton()) {
             await handleEndConversation(interaction);
+            await handleClearUserMessage(interaction);
         }
     },
 }

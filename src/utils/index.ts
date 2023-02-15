@@ -16,6 +16,7 @@ import UserController from "../controllers/UserController";
 import ConversationController from "../controllers/ConversationController";
 import {selectChatMode} from "../components/SelectChatMode";
 import {selectChatModeEmbed} from "../embed/SelectChatModeEmbed";
+import MessageController from "../controllers/MessageController";
 
 export const sendTimedMessage = (message: Message, replyMessage: string, duration: number) => {
     message.reply(replyMessage).then((msg) => {
@@ -118,7 +119,6 @@ export const handleChatModeChange = async (interaction: StringSelectMenuInteract
 export const handleEndConversation = async (interaction: ButtonInteraction) => {
     switch (interaction.customId) {
         case ComponentsCustomId.CancelEndConversation:
-            await interaction.deferUpdate();
             await interaction.update({
                 content: `Your action has been cancelled.`,
             });
@@ -136,4 +136,31 @@ export const handleEndConversation = async (interaction: ButtonInteraction) => {
         default:
             break;
     }
+}
+
+export const handleClearUserMessage = async (interaction: ButtonInteraction) => {
+    switch (interaction.customId) {
+        case ComponentsCustomId.CancelClearMessages:
+            await interaction.update({
+                content: `Your action has been cancelled.`,
+            });
+            setTimeout(() => interaction.deleteReply(), 5000);
+            break;
+
+        case ComponentsCustomId.ClearMessages:
+            const user = await UserController.getUserByDiscordId(interaction.user.id);
+            await MessageController.clearUserMessage(user);
+            await interaction.update({
+                content: `Successfully clear all messages of this user.`,
+            });
+            setTimeout(() => interaction.deleteReply(), 5000);
+            break;
+
+        default:
+            break;
+    }
+}
+
+export const isAdmin = (member: GuildMember) => {
+    return member.permissions.has("Administrator");
 }
