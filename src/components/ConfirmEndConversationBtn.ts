@@ -1,6 +1,6 @@
 import {ActionRowBuilder, ButtonBuilder, ButtonStyle} from "discord.js";
 
-export const Button = new ActionRowBuilder<ButtonBuilder>()
+export const ConfirmEndConversationBtn = new ActionRowBuilder<ButtonBuilder>()
     .addComponents(
         new ButtonBuilder()
             .setCustomId("cancelEndConversationBtn")
