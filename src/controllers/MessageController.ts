@@ -16,9 +16,9 @@ class MessageController {
         });
     }
 
-    public clearUserMessage = async (userId: string) => {
+    public clearUserMessage = async (user: IUserModel) => {
         await Message.deleteMany({
-            user: userId
+            user: user._id,
         });
     }
 }
