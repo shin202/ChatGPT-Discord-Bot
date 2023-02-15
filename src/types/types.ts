@@ -123,4 +123,6 @@ export enum ComponentsCustomId {
     SelectChatMode = "selectChatMode",
     CancelEndConversation = "cancelEndConversationBtn",
     EndConversation = "endConversationBtn",
+    CancelClearMessages = "cancelClearBtn",
+    ClearMessages = "clearMessagesBtn",
 }

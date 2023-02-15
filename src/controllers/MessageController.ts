@@ -21,6 +21,10 @@ class MessageController {
             user: user._id,
         });
     }
+
+    public clearAll = async () => {
+        await Message.deleteMany();
+    }
 }
 
 export default new MessageController();
