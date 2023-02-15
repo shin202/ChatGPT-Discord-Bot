@@ -20,9 +20,7 @@ class ConversationController {
     }
 
     public inConversation = async (user: IUserModel): Promise<boolean> => {
-        const conversation = await Conversation.findOne({
-            user: user._id,
-        });
+        const conversation = await this.getCurrentConversation(user);
 
         if (!conversation) return false;
         await this.expiresConversation(conversation);
@@ -42,9 +40,7 @@ class ConversationController {
     }
 
     public setChatMode = async (user: IUserModel, chatMode: ChatMode) => {
-        const conversation = await Conversation.findOne({
-            user: user._id,
-        });
+        const conversation = await this.getCurrentConversation(user);
 
         if (!conversation) return;
 
@@ -53,9 +49,7 @@ class ConversationController {
     }
 
     public getCurrentChatMode = async (user: IUserModel) => {
-        const conversation = await Conversation.findOne({
-            user: user._id,
-        });
+        const conversation = await this.getCurrentConversation(user);
 
         if (!conversation) return;
 
@@ -66,6 +60,16 @@ class ConversationController {
         return Conversation.findOne({
             user: user._id,
         });
+    }
+
+    public endConversation = async (user: IUserModel) => {
+        const conversation = await this.getCurrentConversation(user);
+
+        if (!conversation) return;
+
+        conversation.conversationExpiredAt = dayjs().toDate();
+        conversation.conversationStatus = ConversationStatus.NotActive;
+        conversation.save();
     }
 }
 
