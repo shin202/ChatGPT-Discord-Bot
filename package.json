@@ -1,13 +1,13 @@
 {
   "name": "gpt-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "An advanced discord chatbot built with NodeJs, Typescript and OpenAI API.",
   "scripts": {
+    "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Shin",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
     "dayjs": "^1.11.7",
