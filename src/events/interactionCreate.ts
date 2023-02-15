@@ -76,6 +76,26 @@ const event: IBotEvent = {
                     embeds: [selectChatModeEmbed((interaction as unknown as CommandInteraction), chatModeKey)],
                 });
             }
+        } else if (interaction.isButton()) {
+            if (interaction.customId === "cancelEndConversationBtn") {
+                await interaction.deferReply({ ephemeral: true });
+                await interaction.editReply({
+                    content: `Your action has been cancelled.`,
+                });
+                setTimeout(() => interaction.deleteReply(), 5000);
+                return;
+            }
+
+            if (interaction.customId === "endConversationBtn") {
+                const user = await UserController.getUserByDiscordId(interaction.user.id);
+                const currentConversation = await ConversationController.getCurrentConversation(user);
+                await ConversationController.expiresConversation(currentConversation!);
+                await interaction.reply({
+                    ephemeral: true,
+                    content: `Conversation has been ended.`,
+                });
+                setTimeout(() => interaction.deleteReply(), 5000);
+            }
         }
     },
 }
