@@ -1,7 +1,6 @@
 import Conversation from "../models/conversation";
 import {ChatMode, ConversationStatus, IConversationModel, IUserModel} from "../types/types";
 import dayjs from "dayjs";
-import conversation from "../models/conversation";
 
 class ConversationController {
     public startNewConversation = async (user: IUserModel, conversationExpires?: Date|number) => {
@@ -61,6 +60,12 @@ class ConversationController {
         if (!conversation) return;
 
         return conversation.currentChatMode;
+    }
+
+    public getCurrentConversation = async (user: IUserModel) => {
+        return Conversation.findOne({
+            user: user._id,
+        });
     }
 }
 
