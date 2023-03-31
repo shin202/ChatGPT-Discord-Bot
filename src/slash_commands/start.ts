@@ -5,6 +5,7 @@ import UserController from "../controllers/UserController";
 import GuildController from "../controllers/GuildController";
 import dayjs from "dayjs";
 import {startConversationEmbed} from "../embed/StartConversationEmbed";
+import MessageController from "../controllers/MessageController";
 
 const command: ISlashCommand = {
     command: new SlashCommandBuilder()
@@ -23,6 +24,8 @@ const command: ISlashCommand = {
             setTimeout(() => interaction.deleteReply(), 5000);
             return;
         }
+
+        await MessageController.clearUserMessage(user);
 
         let conversationTime = null;
         const guildConversationTime = await GuildController.getGuildOption(interaction.guild?.id!, "conversationTime") as number;
