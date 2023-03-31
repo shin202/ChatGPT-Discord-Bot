@@ -126,6 +126,7 @@ export const handleEndConversation = async (interaction: ButtonInteraction) => {
             break;
         case ComponentsCustomId.EndConversation:
             const user = await UserController.getUserByDiscordId(interaction.user.id);
+            await MessageController.clearUserMessage(user);
             await ConversationController.endConversation(user);
             await interaction.update({
                 content: `Conversation has been ended.`,

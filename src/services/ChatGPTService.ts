@@ -1,4 +1,4 @@
-import {Configuration, OpenAIApi} from "openai";
+import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from "openai";
 import MessageController from "../controllers/MessageController";
 import {ChatMode, IChatModes, IUserModel} from "../types/types";
 
@@ -27,7 +27,7 @@ class ChatGPTService {
         return this.CHAT_MODES[chatMode];
     }
 
-    public generateCompletion = async (prompt: string, user: IUserModel, chatMode: ChatMode = ChatMode.Assistant): Promise<string> => {
+    public generateCompletion = async (message: string, user: IUserModel, chatMode: ChatMode = ChatMode.Assistant): Promise<string> => {
         if (!Object.keys(this.CHAT_MODES).includes(chatMode)) {
             throw new Error(`Chat mode ${chatMode} not supported!`);
         }
@@ -39,28 +39,32 @@ class ChatGPTService {
         });
 
         const openai = new OpenAIApi(configuration);
-        let fullPrompt = `${this.CHAT_MODES[chatMode]["rolePlayDescription"]}\n\n`;
+        const messages: ChatCompletionRequestMessage[] = [
+            {role: "system", content: `${this.CHAT_MODES[chatMode].rolePlayDescription}`}
+        ]
 
         if (oldMessages && oldMessages.length > 0) {
             for (const message of oldMessages) {
-                fullPrompt += `User: ${message.userMessage}\n`;
-                fullPrompt += `AI: ${message.botMessage}\n`;
+                messages.push(
+                    {role: "user", content: message.userMessage},
+                    {role: "assistant", content: message.botMessage}
+                )
             }
         }
 
-        fullPrompt += `User: ${prompt}\n`;
-        fullPrompt += `AI: `;
+        messages.push(
+            { role: "user", content: message }
+        );
 
-        const completion = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: fullPrompt,
-            max_tokens: 1000,
+        const completion = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: messages,
+            temperature: 0.2,
             top_p: 1,
-            presence_penalty: 0,
-            frequency_penalty: 0,
-        });
+            max_tokens: 1000,
+        })
 
-        return completion.data.choices[0].text!;
+        return completion.data.choices[0]?.message?.content!;
     }
 }
 
