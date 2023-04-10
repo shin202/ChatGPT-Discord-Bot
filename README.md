@@ -105,10 +105,11 @@ I can't afford to deploy its, so you can deploy your own.
 ```
 
 1. Get your OpenAI API key at [OpenAI](https://openai.com/api/).
-2. Create your discord bot at [Discord Developer](https://discord.com/developers/applications) and get your bot token.
-3. Get your bot client id and your discord guild id.
-4. Edit `.evn.example` to set your tokens then rename it to `.env`.
-5. 🔥 Run and enjoy its 🔥
+2. Get your Replicate API key at [Replicate](https://replicate.com/).
+3. Create your discord bot at [Discord Developer](https://discord.com/developers/applications) and get your bot token.
+4. Get your bot client id and your discord guild id.
+5. Edit `.evn.example` to set your tokens then rename it to `.env`.
+6. 🔥 Run and enjoy its 🔥
 ```sh
     npm start 
 ```
@@ -119,6 +120,17 @@ I can't afford to deploy its, so you can deploy your own.
 - No request limits
 - Supported chat mode: 👩‍💼 LiLy: Assistant, 👨‍💻 Steve: Code Assistant, 👩‍⚕️ Sarah: Psychologist. (*I will add more, if I have time.*)
 - Limited conversation time (*To avoid spam*).
+
+### 🔥 NEW FEATURES
+- 🔥 Add new chat mode (👨‍🎨 Prompt Creator) (`Help users generate unique and creative prompts for image generation.`)
+- 🔥 Now you can generating image with AI by using `/draw` command.
+- 🔥 Variant models for generate image.
+- 🔥 Supported Models:
+    * `OpenJourney (Midjourney V4 Style)`
+    * `Stable Diffusion`
+    * `Portrait Plus (for portrait image)`
+    * `Anything V3 (anime style)`
+    * `Pastel Mix (anime style)`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,6 +154,12 @@ I can't afford to deploy its, so you can deploy your own.
 <img src="src/assets/images/screenshots/1.png">
 <img src="src/assets/images/screenshots/2.png">
 <img src="src/assets/images/screenshots/3.png">
+<img src="src/assets/images/screenshots/4.png">
+<img src="src/assets/images/screenshots/5.png">
+<img src="src/assets/images/screenshots/6.png">
+<img src="src/assets/images/screenshots/7.png">
+<img src="src/assets/images/screenshots/8.png">
+<img src="src/assets/images/screenshots/9.png">
 
 <!-- CONTRIBUTING -->
 ## Contributing

@@ -18,6 +18,7 @@ const command: ISlashCommand = {
             🛠 /help - Show help
             🛠 /end - End conversation
             🛠 /clear - Clear all user message
+            🛠 /draw - Using prompt to generate image with Stable Diffusion AI.
             \n
             📎 Prefix Commands:
             ${prefix}ask - Start asking ChatGPT bot

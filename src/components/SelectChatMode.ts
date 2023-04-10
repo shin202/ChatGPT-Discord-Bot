@@ -24,6 +24,12 @@ export const selectChatMode = (currentChatMode: ChatMode) => new ActionRowBuilde
                     description: "A psychologist chatbot that provides mental health support and guidance named Sarah.",
                     value: ChatMode.Psychologist,
                     default: currentChatMode === ChatMode.Psychologist,
+                },
+                {
+                    label: "Prompt Creator",
+                    description: "Help users generate unique and creative prompts for image generation.",
+                    value: ChatMode.PromptCreator,
+                    default: currentChatMode === ChatMode.PromptCreator
                 }
             )
             .setMinValues(1)
