@@ -1,40 +1,40 @@
-import { Document } from "mongoose";
+import {Document} from "mongoose";
 import {
     AutocompleteInteraction,
-    CommandInteraction,
-    SlashCommandBuilder,
     Collection,
+    CommandInteraction,
     Message,
-    PermissionResolvable
+    PermissionResolvable,
+    SlashCommandBuilder
 } from "discord.js";
 
 export interface ISlashCommand {
-    command: SlashCommandBuilder | any,
-    execute: (interaction: CommandInteraction) => void,
-    autocomplete?: (interaction: AutocompleteInteraction) => void,
-    cooldown?: number,
+    command: SlashCommandBuilder | any
+    execute: (interaction: CommandInteraction) => void
+    autocomplete?: (interaction: AutocompleteInteraction) => void
+    cooldown?: number
 }
 
 export interface ICommand {
-    name: string,
-    execute: (message: Message, args: Array<string>) => void,
-    permissions: Array<PermissionResolvable>,
-    aliases: Array<string>,
-    cooldown?: number,
+    name: string
+    execute: (message: Message, args: Array<string>) => void
+    permissions: Array<PermissionResolvable>
+    aliases: Array<string>
+    cooldown?: number
 }
 
 declare module "discord.js" {
     export interface Client {
-        commands: Collection<string, ICommand>,
-        slashCommands: Collection<string, ISlashCommand>,
+        commands: Collection<string, ICommand>
+        slashCommands: Collection<string, ISlashCommand>
         cooldowns: Collection<string, number>
     }
 }
 
 export interface IBotEvent {
-    name: string,
-    once?: boolean | false,
-    execute: (...args: any) => void,
+    name: string
+    once?: boolean | false
+    execute: (...args: any) => void
 }
 
 export enum ColorTable {
@@ -49,58 +49,64 @@ export enum ColorTable {
 export type ColorType = "mongodb" | "event" | "commands" | "slashCommands" | "error" | "variant";
 
 export interface IChatModeInfo {
-    name: string,
-    welcomeMessage: string,
-    rolePlayDescription: string,
+    name: string
+    welcomeMessage: string
+    rolePlayDescription: string
 }
 
 export interface IChatModes {
-    assistant: IChatModeInfo,
-    codeAssistant: IChatModeInfo,
-    psychologist: IChatModeInfo,
+    assistant: IChatModeInfo
+    codeAssistant: IChatModeInfo
+    psychologist: IChatModeInfo
+    promptCreator: IChatModeInfo
+    [x: string]: IChatModeInfo
 }
 
 export enum ChatMode {
     Assistant = "assistant",
     CodeAssistant = "codeAssistant",
     Psychologist = "psychologist",
+    PromptCreator = "promptCreator"
 }
 
 export interface IMessageOptions {
-    userMessage: string,
-    botMessage: string,
-    chatMode: ChatMode,
+    userMessage: string
+    botMessage: string
+    chatMode: ChatMode
 }
 
 export interface IMessage extends IMessageOptions {
     user: {
-        type: any,
-        ref: string,
+        type: any
+        ref: string
     },
 }
 
-export interface IMessageModel extends IMessage, Document{};
-
-export interface IUser {
-    discordId: string,
+export interface IMessageModel extends IMessage, Document {
 }
 
-export interface IUserModel extends IUser, Document{};
+export interface IUser {
+    discordId: string
+}
+
+export interface IUserModel extends IUser, Document {
+}
 
 export interface IGuildOptions {
-    prefix: string,
-    conversationTime: number,
+    prefix: string
+    conversationTime: number
 }
 
 export type GuildOptionType = "prefix" | "conversationTime";
 
 export interface IGuild {
-    guildId: string,
-    options: IGuildOptions,
-    joinedAt: Date,
+    guildId: string
+    options: IGuildOptions
+    joinedAt: Date
 }
 
-export interface IGuildModel extends IGuild, Document{};
+export interface IGuildModel extends IGuild, Document {
+}
 
 export enum ConversationStatus {
     Active = 1,
@@ -109,15 +115,16 @@ export enum ConversationStatus {
 
 export interface IConversation {
     user: {
-        type: string,
-        ref: string,
+        type: string
+        ref: string
     },
-    currentChatMode: ChatMode,
-    conversationStatus: ConversationStatus,
-    conversationExpiredAt: Date,
+    currentChatMode: ChatMode
+    conversationStatus: ConversationStatus
+    conversationExpiredAt: Date
 }
 
-export interface IConversationModel extends IConversation, Document{};
+export interface IConversationModel extends IConversation, Document {
+}
 
 export enum ComponentsCustomId {
     SelectChatMode = "selectChatMode",
@@ -125,4 +132,29 @@ export enum ComponentsCustomId {
     EndConversation = "endConversationBtn",
     CancelClearMessages = "cancelClearBtn",
     ClearMessages = "clearMessagesBtn",
+}
+
+export interface IReplicateModelInfo {
+    owner: string
+    name: string
+    version: string
+}
+
+export interface IReplicateModel {
+    stableDiffusion: IReplicateModelInfo
+    openJourney: IReplicateModelInfo
+    dreamShaper: IReplicateModelInfo
+    portraitPlus: IReplicateModelInfo
+    anythingV3: IReplicateModelInfo
+    pastelMix: IReplicateModelInfo
+    [x: string]: IReplicateModelInfo
+}
+
+export enum ReplicateModel {
+    StableDiffusion = "stableDiffusion",
+    OpenJourney = "openJourney",
+    DreamShaper = "dreamShaper",
+    PortraitPlus = "portraitPlus",
+    AnythingV3 = "anythingV3",
+    PastelMix = "pastelMix"
 }

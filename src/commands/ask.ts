@@ -7,6 +7,8 @@ import MessageController from "../controllers/MessageController";
 const command: ICommand = {
     name: "ask",
     execute: async (message, args) => {
+        await message.channel.sendTyping();
+
         const user = await UserController.getUserByDiscordId(message.author.id);
         const inConversation = await ConversationController.inConversation(user);
 
@@ -29,7 +31,6 @@ const command: ICommand = {
            userMessage: userMessage,
            botMessage: resMessage,
         });
-        await message.channel.sendTyping();
         await message.reply(resMessage);
     },
     permissions: [],
