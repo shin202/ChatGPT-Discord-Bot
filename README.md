@@ -108,7 +108,7 @@ I can't afford to deploy its, so you can deploy your own.
 2. Get your Replicate API key at [Replicate](https://replicate.com/).
 3. Create your discord bot at [Discord Developer](https://discord.com/developers/applications) and get your bot token.
 4. Get your bot client id and your discord guild id.
-5. Edit `.evn.example` to set your tokens then rename it to `.env`.
+5. Edit `.env.example` to set your tokens then rename it to `.env`.
 6. 🔥 Run and enjoy its 🔥
 ```sh
     npm start 
