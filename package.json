@@ -15,7 +15,7 @@
     "dotenv": "^16.0.3",
     "mongoose": "^7.0.4",
     "openai": "^3.2.1",
-    "replicate": "^0.11.0"
+    "replicate": "^0.12.0"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
