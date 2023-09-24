@@ -1,4 +1,6 @@
-import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from "openai";
+import OpenAi from "openai";
+import {Chat} from "openai/resources";
+import ChatCompletionMessageParam = Chat.ChatCompletionMessageParam;
 import MessageController from "../controllers/MessageController";
 import {ChatMode, IChatModes, IUserModel} from "../types/types";
 
@@ -39,12 +41,11 @@ class ChatGPTService {
 
         const oldMessages = await MessageController.getUserMessage(user, chatMode);
 
-        const configuration = new Configuration({
+        const openAi = new OpenAi({
             apiKey: OPENAI_KEY,
         });
 
-        const openai = new OpenAIApi(configuration);
-        const messages: ChatCompletionRequestMessage[] = [
+        const messages: ChatCompletionMessageParam[] = [
             {role: "system", content: `${this.CHAT_MODES[chatMode].rolePlayDescription}`}
         ]
 
@@ -58,18 +59,18 @@ class ChatGPTService {
         }
 
         messages.push(
-            { role: "user", content: message }
+            {role: "user", content: message}
         );
 
-        const completion = await openai.createChatCompletion({
+        const completion = await openAi.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: messages,
             temperature: 0.2,
             top_p: 1,
             max_tokens: 1000,
-        })
+        });
 
-        return completion.data.choices[0]?.message?.content!;
+        return completion.choices[0].message.content!;
     }
 }
 
