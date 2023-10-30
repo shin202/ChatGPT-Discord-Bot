@@ -14,7 +14,7 @@
     "discord.js": "^14.9.0",
     "dotenv": "^16.3.1",
     "mongoose": "^7.5.2",
-    "openai": "^4.8.0",
+    "openai": "^4.14.2",
     "replicate": "^0.18.0"
   },
   "devDependencies": {
